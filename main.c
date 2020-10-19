@@ -95,11 +95,9 @@ void main_task(void){
     while(1){
       int val = adc1_get_raw(ADC1_CHANNEL_0);
   		temp = (100 *  val / 1023) * 1.3;
-  		printf("El valor de temperatura es %f °C\r\n", temp);
       sprintf(c, "%g", temp);
-      printf("%s\n", c);
     	esp_mqtt_client_publish(client, "temperatura", c, 0, 1, 0);
-    	delay_ms(5000);
+    	delay_ms(15000);
     }
 }
 
