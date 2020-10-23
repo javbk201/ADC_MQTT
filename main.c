@@ -26,8 +26,8 @@
 xSemaphoreHandle wifi_on;
 xSemaphoreHandle mqtt;
 
-#define WIFI_SSID "FAMILIA AVENDANO"
-#define WIFI_PASS "27ZJM2510R"
+#define WIFI_SSID ""
+#define WIFI_PASS ""
 
 char buff[50] = {0};
 
@@ -78,10 +78,10 @@ void main_task(void){
     printf("Conectando a wifi\r\n");
 
 	esp_mqtt_client_config_t mqtt_cfg = {
-        .host = "192.168.1.57",
+        .host = "Host IP",
         .event_handle = mqtt_event_handler,
 		    .lwt_topic = "testament",
-		    .lwt_msg = "electricaribe_HP",
+		    .lwt_msg = "",
 		    .disable_clean_session = 1
         };
 
@@ -89,7 +89,7 @@ void main_task(void){
     esp_mqtt_client_start(client);
 
     xSemaphoreTake(mqtt, portMAX_DELAY);
-    printf("Subscrito a Broker\r\n");
+    printf("Broker Conected\r\n");
     float temp;
     char c[50];
     while(1){
