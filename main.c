@@ -5,7 +5,7 @@
 #include "esp_wifi.h"
 #include "esp_system.h"
 #include "esp_log.h"
-#include "esp_event_loop.h"
+#include "esp_event.h"
 
 #include "nvs_flash.h"
 
@@ -93,11 +93,11 @@ void main_task(void){
     float temp;
     char c[50];
     while(1){
-      int val = adc1_get_raw(ADC1_CHANNEL_0);
-  		temp = (100 *  val / 1023) * 1.3;
-      sprintf(c, "%g", temp);
-    	esp_mqtt_client_publish(client, "temperatura", c, 0, 1, 0);
-    	delay_ms(15000);
+	    int val = adc1_get_raw(ADC1_CHANNEL_0);
+	    temp = (val) /  10;
+	    sprintf(c, "%g", temp);
+	    esp_mqtt_client_publish(client, "temperatura", c, 0, 1, 0);
+	    delay_ms(15000);
     }
 }
 
